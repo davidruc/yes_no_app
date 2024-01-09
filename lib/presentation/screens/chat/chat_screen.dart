@@ -30,12 +30,11 @@ class ChatScreen extends StatelessWidget {
 }
 
 class _ChatView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     //  que instancia de provider necesito? ChatProvider.
     final chatProvider = context.watch<ChatProvider>();
-    
+
     //! Es importante encerrar las screens en este widget SafeArea, para que no quede sobre botones o cosas que hacen parte de la aplicació
     return SafeArea(
       child: Padding(
@@ -45,16 +44,19 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.builder(
+                  controller: chatProvider.chatScrollController,
               itemCount: chatProvider.messageList.length,
               itemBuilder: (context, index) {
                 final message = chatProvider.messageList[index];
                 return (message.fromWho == FromWho.mine)
-                    ? MyMessageBubble( message: message )
+                    ? MyMessageBubble(message: message)
                     : HerMessageBubble();
               },
             )),
             //caja de mensajes
-            const MessageFieldBox(),
+            MessageFieldBox(
+              onValue: chatProvider.sendMessage,
+            ),
           ],
         ),
       ),
