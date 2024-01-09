@@ -1,18 +1,23 @@
+class YesNoAnswer {
+    String answer;
+    bool forced;
+    String image;
 
+    YesNoAnswer({
+        required this.answer,
+        required this.forced,
+        required this.image,
+    });
 
-class YesNoModel {
-
-  final String answer;
-  final bool forced;
-  final String? imageUrl;
-
-  YesNoModel({required this.answer, required this.forced, required this.imageUrl});
-
-  factory YesNoModel.fromJsonMap(Map<String, dynamic> json)=>
-    YesNoModel(
-      answer: json["answer"], 
-      forced: json["forced"], 
-      imageUrl: json["image"]
+    factory YesNoAnswer.fromJson(Map<String, dynamic> json) => YesNoAnswer(
+        answer: json["answer"],
+        forced: json["forced"],
+        image: json["image"],
     );
 
+    Map<String, dynamic> toJson() => {
+        "answer": answer,
+        "forced": forced,
+        "image": image,
+    };
 }
