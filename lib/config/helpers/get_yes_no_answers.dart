@@ -10,10 +10,7 @@ class GetYesNoAnswer {
     final response = await _peticionDio.get("https://yesno.wtf/api");
 
     final yesNoModel = YesNoModel.fromJsonMap(response.data);
-    return Message(
-      text: yesNoModel.answer,
-      fromWho: FromWho.other,
-      imageUrl: yesNoModel.imageUrl
-      );
+
+    return yesNoModel.toMessageEntity();
   }
 }
